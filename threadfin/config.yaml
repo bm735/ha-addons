@@ -9,8 +9,13 @@ arch:
   - aarch64
   - amd64
 host_network: true
+environment:
+  THREADFIN_CONF: "/data/conf"
+  THREADFIN_HOME: "/data"
+ports_description:
+  34401/tcp: "Web interface"
 ports:
-  - 34401/tcp: 34401
+  34401/tcp: 34401
 webui: "[PROTO:ssl]://[HOST]:[PORT:34401]/web"
 map:
   - share:rw
