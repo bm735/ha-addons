@@ -1,6 +1,6 @@
 #include <tunables/global>
 
-profile xteve_addon flags=(attach_disconnected,mediate_deleted) {
+profile threadfin_addon flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
 
   capability,

@@ -1,8 +1,6 @@
-{
-  "last_update": "22-10-2022",
-  "repository": "bm735/haha-addons",
-  "slug": "treadfin",
-  "source": "github",
-  "upstream_repo": "SenexCrenshaw/xTeVe",
-  "upstream_version": "2.5.3"
-}
+last_update: "22-10-2022"
+repository: "bm735/haha-addons"
+slug: "treadfin"
+source: "github"
+upstream_repo: "SenexCrenshaw/xTeVe"
+upstream_version: "2.5.3"
