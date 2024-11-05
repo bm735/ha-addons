@@ -13,7 +13,7 @@ environment:
   THREADFIN_CONF: "/data/conf"
   THREADFIN_HOME: "/data"
   XTEVE_PORT: 34401
-  XTEVE_CONF: "/data/conf",
+  XTEVE_CONF: "/data/conf"
   XTEVE_HOME: "/data"
 ARG XTEVE_PORT=34400
 ports_description:
