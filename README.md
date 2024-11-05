@@ -20,7 +20,7 @@ This repository contains the following add-ons
 
 _Example add-on to use as a blueprint for new add-ons._
 
-### [Example add-on](./example2)
+### [Example2 add-on](./example2)
 
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
