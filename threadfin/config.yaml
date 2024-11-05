@@ -14,8 +14,6 @@ environment:
   THREADFIN_HOME: "/data"
   XTEVE_CONF: "/data/conf"
   XTEVE_HOME: "/data"
-arguments:
-  XTEVE_PORT: 34401
 ports_description:
   34401/tcp: "Web interface"
 ports:
