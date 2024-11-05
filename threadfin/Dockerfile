@@ -19,7 +19,7 @@ ENV S6_CMD_WAIT_FOR_SERVICES=1 \
 
 USER root
 
-RUN cp -vnpr /home/xteve* /data || true
+RUN cp -vnpr /home/threadfin* /data || true
 
 ##################
 # 3 Install apps #
@@ -82,13 +82,13 @@ LABEL \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
-    maintainer="alexbelgium (https://github.com/alexbelgium)" \
+    maintainer="bm735 (https://github.com/bm735)" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
     org.opencontainers.image.vendor="Home Assistant Add-ons" \
-    org.opencontainers.image.authors="alexbelgium (https://github.com/alexbelgium)" \
+    org.opencontainers.image.authors="bm735 (https://github.com/bm735)" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://github.com/alexbelgium" \
+    org.opencontainers.image.url="https://github.com/bm735" \
     org.opencontainers.image.source="https://github.com/${BUILD_REPOSITORY}" \
     org.opencontainers.image.documentation="https://github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
