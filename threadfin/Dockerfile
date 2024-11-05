@@ -98,4 +98,3 @@ LABEL \
 ####################
 # 6 HealthcheckNOT #
 ####################
-ARG XTEVE_PORT: 34401

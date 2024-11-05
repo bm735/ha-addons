@@ -15,9 +15,9 @@ environment:
   XTEVE_CONF: "/data/conf"
   XTEVE_HOME: "/data"
 ports_description:
-  34401/tcp: "Web interface"
+  34400/tcp: "Web interface"
 ports:
-  34401/tcp: 34401
+  34400/tcp: 34401
 webui: "[PROTO:ssl]://[HOST]:[PORT:34401]/web"
 map:
   - share:rw
