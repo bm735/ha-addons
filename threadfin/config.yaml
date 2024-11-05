@@ -5,11 +5,9 @@ slug: threadfin
 description: Threadfin add-on
 url: "https://github.com/bm735/ha-addons/threadfin"
 arch:
-  - armhf
   - armv7
   - aarch64
   - amd64
-  - i386
 environment:
   - THREADFIN_CONF: "/data/conf"
   - THREADFIN_HOME: "/data"
@@ -23,8 +21,4 @@ map:
   - share:rw
   - config:rw
   - ssl:ro
-options:
-  message: "Threadfin..."
-schema:
-  message: "str?"
 image: "ghcr.io/bm735/{arch}-addon-example"
