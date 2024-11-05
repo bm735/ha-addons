@@ -24,4 +24,4 @@ map:
   - share:rw
   - homeassistant_config:rw
   - ssl:ro
-image: "ghcr.io/bm735/threadfin-{arch}"
+#image: "ghcr.io/bm735/threadfin-{arch}"
