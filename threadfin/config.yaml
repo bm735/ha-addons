@@ -17,7 +17,7 @@ environment:
 ports_description:
   34400/tcp: "Web interface"
 ports:
-  34400/tcp: 34401
+  34400/tcp: 34400
 webui: "[PROTO:ssl]://[HOST]:[PORT:34401]/web"
 map:
   - share:rw
