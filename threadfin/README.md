@@ -1,6 +1,6 @@
 # Home Assistant Add-on: Threadfin add-on
 
-_Example2 add-on to use as a blueprint for new add-ons._
+_Threadfin add-on._
 
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
