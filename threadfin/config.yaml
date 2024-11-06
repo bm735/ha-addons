@@ -16,7 +16,7 @@ ports:
 environment:
   THREADFIN_CONF: "/data/conf"
   THREADFIN_HOME: "/data"
-  THREADFIN_PORT: 34401
+  #THREADFIN_PORT: 34401
   XTEVE_CONF: "/data/conf"
   XTEVE_HOME: "/data"
 webui: "[PROTO:ssl]://[HOST]:[PORT:34401]/web"
