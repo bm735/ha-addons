@@ -10,7 +10,6 @@ arch:
 #  - aarch64
 host_network: true
 udev: true
-ingress: false
 ports:
   34401/tcp: 34401
 ports_description:
