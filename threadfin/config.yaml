@@ -5,7 +5,7 @@ slug: threadfin
 description: "Threadfin add-on"
 url: "https://github.com/bm735/ha-addons"
 arch:
-  - amd64cd /data
+  - amd64
 #  - armv7
 #  - aarch64
 host_network: true
