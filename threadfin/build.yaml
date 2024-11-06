@@ -1,5 +1,6 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
 build_from:
-  amd64: "fyb3roptik/threadfin:latest"
+  amd64: "senexcrenshaw/xteve:latest"
+#  amd64: "fyb3roptik/threadfin:latest"
 #  armv7: "fyb3roptik/threadfin:latest"
 #  aarch64: "fyb3roptik/threadfin:latest"
