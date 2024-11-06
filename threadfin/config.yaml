@@ -1,6 +1,6 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Threadfin
-version: "0.0.24"
+version: "0.0.25"
 slug: threadfin
 description: "Threadfin add-on"
 url: "https://github.com/bm735/ha-addons"
@@ -11,14 +11,14 @@ arch:
 host_network: true
 udev: true
 ports:
-  34401/tcp: 34400
+  34400/tcp: 34400
 ports_description:
-  34401/tcp: "Web interface"
+  34400/tcp: "Web interface"
 environment:
   THREADFIN_CONF: "/data/conf"
   THREADFIN_TEMP: "/data/temp"
-  XTEVE_CONF: "/data/conf"
-  XTEVE_HOME: "/data"
+#  XTEVE_CONF: "/data/conf"
+#  XTEVE_HOME: "/data"
 webui: "[PROTO:ssl]://[HOST]:[PORT:34400]/web"
 map:
   - share:rw
