@@ -1,6 +1,6 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Threadfin
-version: "0.0.18"
+version: "0.0.19"
 slug: threadfin
 description: "Threadfin add-on"
 url: "https://github.com/bm735/ha-addons"
@@ -31,6 +31,6 @@ ports:
 ports_description:
   8384/tcp: Web frontend (not needed with Ingress)
 ingress: true
-ingress_port: 8384
+ingress_port: 34401
 panel_title: Threadfin
 panel_icon: mdi:sync
