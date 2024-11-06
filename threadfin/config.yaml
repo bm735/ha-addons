@@ -1,17 +1,17 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Threadfin
-version: "0.0.20"
+version: "0.0.21"
 slug: threadfin
 description: "Threadfin add-on"
 url: "https://github.com/bm735/ha-addons"
 arch:
-  - amd64
+  - amd64cd /data
 #  - armv7
 #  - aarch64
-#host_network: true
+host_network: true
 udev: true
-#ports:
-#  34401/tcp: 34401
+ports:
+  34401/tcp: 34401
 ports_description:
   34401/tcp: "Web interface"
 environment:
@@ -19,18 +19,18 @@ environment:
   THREADFIN_HOME: "/data"
   XTEVE_CONF: "/data/conf"
   XTEVE_HOME: "/data"
-#webui: "[PROTO:ssl]://[HOST]:[PORT:34401]/web"
+webui: "[PROTO:ssl]://[HOST]:[PORT:34401]/web"
 map:
   - share:rw
   - homeassistant_config:rw
   - ssl:ro
 #image: "ghcr.io/bm735/threadfin-{arch}"
 #init: false
-ports:
-  34401/tcp: null
-ports_description:
-  34401/tcp: Web frontend (not needed with Ingress)
-ingress: true
-ingress_port: 34401
-panel_title: Threadfin
-panel_icon: mdi:sync
+#ports:
+#  34401/tcp: null
+#ports_description:
+#  34401/tcp: Web frontend (not needed with Ingress)
+#ingress: true
+#ingress_port: 34401
+#panel_title: Threadfin
+#panel_icon: mdi:sync
