@@ -1,13 +1,13 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Threadfin
-version: "0.0.9"
+version: "0.0.10"
 slug: threadfin
 description: "Threadfin add-on"
 url: "https://github.com/bm735/ha-addons/threadfin"
 arch:
-  - armv7
-  - aarch64
   - amd64
+#  - armv7
+#  - aarch64
 host_network: true
 ports_description:
   34401/tcp: "Web interface"
