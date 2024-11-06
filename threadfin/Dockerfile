@@ -1,89 +1,100 @@
-# First stage. Building a binary
-# -----------------------------------------------------------------------------
-    FROM golang:1.18 AS builder
+#################
+# 1 Build Image #
+#################
 
-    # Download the source code
-    RUN apt-get update && apt-get install -y git
-    RUN git clone https://github.com/Threadfin/Threadfin.git /src
-    
-    WORKDIR /src
-    
-    RUN git checkout main
-    RUN git pull
-    RUN go mod tidy && go mod vendor
-    RUN go build threadfin.go
-    
-    # Second stage. Creating an image
-    # -----------------------------------------------------------------------------
-    ARG USE_NVIDIA=0
-    FROM ${USE_NVIDIA:+nvidia/cuda:12.5.1-base-ubuntu22.04}${USE_NVIDIA:-ubuntu:22.04}
-    
-    ARG BUILD_DATE
-    ARG VCS_REF
-    ARG THREADFIN_PORT=34401
-    ARG THREADFIN_VERSION
-    
-    LABEL org.label-schema.build-date="{$BUILD_DATE}" \
-          org.label-schema.name="Threadfin" \
-          org.label-schema.description="Dockerized Threadfin" \
-          org.label-schema.url="https://hub.docker.com/r/fyb3roptik/threadfin/" \
-          org.label-schema.vcs-ref="{$VCS_REF}" \
-          org.label-schema.vcs-url="https://github.com/Threadfin/Threadfin" \
-          org.label-schema.vendor="Threadfin" \
-          org.label-schema.version="{$THREADFIN_VERSION}" \
-          org.label-schema.schema-version="1.0" \
-          DISCORD_URL="https://discord.gg/bEPPNP2VG8"
-    
-    ENV THREADFIN_BIN=/home/threadfin/bin
-    ENV THREADFIN_CONF=/home/threadfin/conf
-    ENV THREADFIN_HOME=/home/threadfin
-    ENV THREADFIN_TEMP=/tmp/threadfin
-    ENV THREADFIN_CACHE=/home/threadfin/cache
-    ENV THREADFIN_UID=31337
-    ENV THREADFIN_GID=31337
-    ENV THREADFIN_USER=threadfin
-    ENV THREADFIN_BRANCH=main
-    ENV THREADFIN_DEBUG=1
-    ENV THREADFIN_PORT=34401
-    ENV THREADFIN_LOG=/var/log/threadfin.log
-    ENV THREADFIN_BIND_IP_ADDRESS=0.0.0.0
-    
-    # Add binary to PATH
-    ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$THREADFIN_BIN
-    
-    # Set working directory
-    WORKDIR $THREADFIN_HOME
-    
-    RUN apt-get update && apt-get upgrade -y
-    RUN apt-get install -y ca-certificates curl ffmpeg vlc
-    
-    RUN DEBIAN_FRONTEND=noninteractive TZ="America/New_York" apt-get -y install tzdata
-    
-    RUN mkdir -p $THREADFIN_BIN
-    
-    # Copy built binary from builder image
-    COPY --chown=${THREADFIN_UID} --from=builder [ "/src/threadfin", "${THREADFIN_BIN}/" ]
-    
-    # Set binary permissions
-    RUN chmod +rx $THREADFIN_BIN/threadfin
-    RUN mkdir $THREADFIN_HOME/cache
-    
-    # Create working directories for Threadfin
-    RUN mkdir $THREADFIN_CONF
-    RUN chmod a+rwX $THREADFIN_CONF
-    RUN mkdir $THREADFIN_TEMP
-    RUN chmod a+rwX $THREADFIN_TEMP
-    
-    # For VLC
-    RUN sed -i 's/geteuid/getppid/' /usr/bin/vlc
-    
-    # Configure container volume mappings
-    VOLUME $THREADFIN_CONF
-    VOLUME $THREADFIN_TEMP
-    
-    EXPOSE $THREADFIN_PORT
-    
-    # Run the Threadfin executable
-    #ENTRYPOINT ${THREADFIN_BIN}/threadfin -port=${THREADFIN_PORT} -bind=${THREADFIN_BIND_IP_ADDRESS} -config=${THREADFIN_CONF} -debug=${THREADFIN_DEBUG}
-    ENTRYPOINT ${THREADFIN_BIN}/threadfin -port=${THREADFIN_PORT} -config=${THREADFIN_CONF}
-    
+ARG BUILD_FROM
+ARG BUILD_VERSION
+ARG BUILD_UPSTREAM="1.2.15"
+FROM $BUILD_FROM
+
+##################
+# 2 Modify Image #
+##################
+
+# Set S6 wait time
+ENV S6_CMD_WAIT_FOR_SERVICES=1 \
+    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \
+    S6_SERVICES_GRACETIME=0
+
+
+USER root
+
+RUN cp -vnpr /home/threadfin* /data || true
+
+##################
+# 3 Install apps #
+##################
+
+# Copy local files
+COPY rootfs/ /
+
+# Uses /bin for compatibility purposes
+# hadolint ignore=DL4005
+RUN if [ ! -f /bin/sh ] && [ -f /usr/bin/sh ]; then ln -s /usr/bin/sh /bin/sh; fi && \
+    if [ ! -f /bin/bash ] && [ -f /usr/bin/bash ]; then ln -s /usr/bin/bash /bin/bash; fi
+
+# Modules
+ARG MODULES="00-banner.sh 01-custom_script.sh"
+
+# Automatic modules download
+ADD "https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_automodules.sh" "/ha_automodules.sh"
+RUN chmod 744 /ha_automodules.sh && /ha_automodules.sh "$MODULES" && rm /ha_automodules.sh
+
+# Manual apps
+ENV PACKAGES=""
+
+# Automatic apps & bashio
+ADD "https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_autoapps.sh" "/ha_autoapps.sh"
+RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" && rm /ha_autoapps.sh
+
+################
+# 4 Entrypoint #
+################
+
+# Add entrypoint
+ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
+ADD "https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint.sh" "/ha_entrypoint.sh"
+
+# Entrypoint modifications
+ADD "https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint_modif.sh" "/ha_entrypoint_modif.sh"
+RUN chmod 777 /ha_entrypoint.sh /ha_entrypoint_modif.sh && /ha_entrypoint_modif.sh && rm /ha_entrypoint_modif.sh
+
+#
+#WORKDIR /
+#ENTRYPOINT [ "/usr/bin/env" ]
+#CMD [ "/ha_entrypoint.sh" ]
+#SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+############
+# 5 Labels #
+############
+
+ARG BUILD_ARCH
+ARG BUILD_DATE
+ARG BUILD_DESCRIPTION
+ARG BUILD_NAME
+ARG BUILD_REF
+ARG BUILD_REPOSITORY
+ARG BUILD_VERSION
+LABEL \
+    io.hass.name="${BUILD_NAME}" \
+    io.hass.description="${BUILD_DESCRIPTION}" \
+    io.hass.arch="${BUILD_ARCH}" \
+    io.hass.type="addon" \
+    io.hass.version=${BUILD_VERSION} \
+    maintainer="bm735 (https://github.com/bm735)" \
+    org.opencontainers.image.title="${BUILD_NAME}" \
+    org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
+    org.opencontainers.image.vendor="Home Assistant Add-ons" \
+    org.opencontainers.image.authors="bm735 (https://github.com/bm735)" \
+    org.opencontainers.image.licenses="MIT" \
+    org.opencontainers.image.url="https://github.com/bm735" \
+    org.opencontainers.image.source="https://github.com/${BUILD_REPOSITORY}" \
+    org.opencontainers.image.documentation="https://github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
+    org.opencontainers.image.created=${BUILD_DATE} \
+    org.opencontainers.image.revision=${BUILD_REF} \
+    org.opencontainers.image.version=${BUILD_VERSION}
+
+####################
+# 6 HealthcheckNOT #
+####################
