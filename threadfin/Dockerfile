@@ -13,14 +13,13 @@
     RUN go mod tidy && go mod vendor
     RUN go build threadfin.go
     
-    # Second stage. Creating an image
+    # Second stage. Creating an imagecd /threa
     # -----------------------------------------------------------------------------
     ARG USE_NVIDIA=0
     FROM ${USE_NVIDIA:+nvidia/cuda:12.5.1-base-ubuntu22.04}${USE_NVIDIA:-ubuntu:22.04}
     
     ARG BUILD_DATE
     ARG VCS_REF
-    ARG THREADFIN_PORT=34400
     ARG THREADFIN_VERSION
     
     LABEL org.label-schema.build-date="{$BUILD_DATE}" \
@@ -39,8 +38,8 @@
     ENV THREADFIN_HOME=/home/threadfin
     ENV THREADFIN_TEMP=/tmp/threadfin
     ENV THREADFIN_CACHE=/home/threadfin/cache
-    ENV THREADFIN_UID=31337
-    ENV THREADFIN_GID=31337
+    #ENV THREADFIN_UID=31337
+    #ENV THREADFIN_GID=31337
     ENV THREADFIN_USER=threadfin
     ENV THREADFIN_BRANCH=main
     ENV THREADFIN_DEBUG=0
@@ -84,4 +83,4 @@
     EXPOSE $THREADFIN_PORT
     
     # Run the Threadfin executable
-    ENTRYPOINT ${THREADFIN_BIN}/threadfin -port=${THREADFIN_PORT} -bind=${THREADFIN_BIND_IP_ADDRESS} -config=${THREADFIN_CONF} -debug=${THREADFIN_DEBUG}
+    #ENTRYPOINT ${THREADFIN_BIN}/threadfin -port=${THREADFIN_PORT} -bind=${THREADFIN_BIND_IP_ADDRESS} -config=${THREADFIN_CONF} -debug=${THREADFIN_DEBUG}
