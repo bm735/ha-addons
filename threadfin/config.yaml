@@ -25,7 +25,7 @@ map:
   - homeassistant_config:rw
   - ssl:ro
 #image: "ghcr.io/bm735/threadfin-{arch}"
-init: false
+#init: false
 ports:
   34401/tcp: null
 ports_description:
