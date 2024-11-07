@@ -9,7 +9,7 @@
     },
     "host_network": true,
     "map": [
-      "config:rw",
+      "homeassistant_config:rw",
       "share:rw",
       "ssl:ro"
     ],
@@ -25,4 +25,4 @@
     "url": "https://github.com/bm735/ha-addons",
     "version": "0.0.34",
     "webui": "[PROTO:ssl]://[HOST]:[PORT:34401]/web"
-  }
+}
