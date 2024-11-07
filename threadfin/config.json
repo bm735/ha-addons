@@ -1,0 +1,29 @@
+{
+    "arch": [
+      "amd64"
+    ],
+    "codenotary": "alexandrep.github@gmail.com",
+    "description": "M3U Proxy for Plex DVR and Emby Live TV",
+    "environment": {
+      "THREADFIN_CONF": "/data/conf",
+      "THREADFIN_HOME": "/data"
+    },
+    "host_network": true,
+    "map": [
+      "config:rw",
+      "share:rw",
+      "ssl:ro"
+    ],
+    "name": "threadfin",
+    "ports": {
+      "34400/tcp": 34400
+    },
+    "ports_description": {
+      "34400/tcp": "Web interface"
+    },
+    "slug": "threadfin",
+    "udev": true,
+    "url": "https://github.com/bm735/ha-addons",
+    "version": "0.0.30",
+    "webui": "[PROTO:ssl]://[HOST]:[PORT:34400]/web"
+  }
