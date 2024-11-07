@@ -38,8 +38,6 @@
     ENV THREADFIN_HOME=/home/threadfin
     ENV THREADFIN_TEMP=/tmp/threadfin
     ENV THREADFIN_CACHE=/home/threadfin/cache
-    #ENV THREADFIN_UID=31337
-    #ENV THREADFIN_GID=31337
     ENV THREADFIN_USER=threadfin
     ENV THREADFIN_BRANCH=main
     ENV THREADFIN_DEBUG=0
@@ -77,8 +75,8 @@
     RUN sed -i 's/geteuid/getppid/' /usr/bin/vlc
     
     # Configure container volume mappings
-    VOLUME $THREADFIN_CONF
-    VOLUME $THREADFIN_TEMP
+    #VOLUME $THREADFIN_CONF
+    #VOLUME $THREADFIN_TEMP
     
     EXPOSE $THREADFIN_PORT
     
