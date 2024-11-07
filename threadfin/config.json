@@ -22,7 +22,7 @@
     },
     "slug": "threadfin",
     "udev": true,
-    "url": "https://github.com/alexbelgium/hassio-addons",
+    "url": "https://github.com/bm735/ha-addons",
     "version": "0.0.33",
     "webui": "[PROTO:ssl]://[HOST]:[PORT:34401]/web"
   }
