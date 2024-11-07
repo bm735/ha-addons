@@ -13,14 +13,14 @@
       "share:rw",
       "ssl:ro"
     ],
-    "name": "Xteve",
+    "name": "threadfin",
     "ports": {
       "34401/tcp": 34401
     },
     "ports_description": {
       "34401/tcp": "Web interface"
     },
-    "slug": "xteve",
+    "slug": "threadfin",
     "udev": true,
     "url": "https://github.com/alexbelgium/hassio-addons",
     "version": "0.0.33",
