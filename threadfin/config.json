@@ -5,6 +5,8 @@
     "codenotary": "alexandrep.github@gmail.com",
     "description": "M3U Proxy for Plex DVR and Emby Live TV",
     "environment": {
+      "XTEVE_CONF": "/data/conf",
+      "XTEVE_HOME": "/data",
       "XTEVE_PORT": "34401"
     },
     "host_network": true,
@@ -23,6 +25,6 @@
     "slug": "threadfin",
     "udev": true,
     "url": "https://github.com/bm735/ha-addons",
-    "version": "0.0.34",
+    "version": "0.0.35",
     "webui": "[PROTO:ssl]://[HOST]:[PORT:34401]/web"
 }
