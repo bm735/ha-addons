@@ -5,7 +5,8 @@
     "codenotary": "alexandrep.github@gmail.com",
     "description": "M3U Proxy for Plex DVR and Emby Live TV",
     "environment": {
-      "XTEVE_PORT": 34401
+      "THREADFIN_CONF": "/data/conf",
+      "THREADFIN_HOME": "/data"
     },
     "host_network": true,
     "map": [
@@ -13,16 +14,16 @@
       "share:rw",
       "ssl:ro"
     ],
-    "name": "Xteve",
+    "name": "threadfin",
     "ports": {
-      "34401/tcp": 34401
+      "34400/tcp": 34400
     },
     "ports_description": {
-      "34401/tcp": "Web interface"
+      "34400/tcp": "Web interface"
     },
-    "slug": "xteve",
+    "slug": "threadfin",
     "udev": true,
-    "url": "https://github.com/alexbelgium/hassio-addons",
-    "version": "2.5.3-2",
-    "webui": "[PROTO:ssl]://[HOST]:[PORT:34401]/web"
+    "url": "https://github.com/bm735/ha-addons",
+    "version": "0.0.32",
+    "webui": "[PROTO:ssl]://[HOST]:[PORT:34400]/web"
   }
