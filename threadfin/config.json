@@ -9,7 +9,10 @@
       "THREADFIN_HOME": "/data",
       "THREADFIN_PORT": "34401",
       "THREADFIN_DEBUG": "3",
-      "THREADFIN_BIND_IP_ADDRESS": "0.0.0.0"
+      "THREADFIN_BIND_IP_ADDRESS": "0.0.0.0",
+      "PUID": "1000",
+      "PGID": "1000",
+      "UMASK_SET": "022"
     },
     "host_network": true,
     "map": [
