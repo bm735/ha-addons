@@ -7,7 +7,9 @@
     "environment": {
       "THREADFIN_CONF": "/data/conf",
       "THREADFIN_HOME": "/data",
-      "THREADFIN_PORT": "34401"
+      "THREADFIN_PORT": "34401",
+      "THREADFIN_DEBUG": "3",
+      "THREADFIN_BIND_IP_ADDRESS": "0.0.0.0"
     },
     "host_network": true,
     "map": [
@@ -25,6 +27,6 @@
     "slug": "threadfin",
     "udev": true,
     "url": "https://github.com/bm735/ha-addons",
-    "version": "0.0.38",
+    "version": "0.0.39",
     "webui": "[PROTO:ssl]://[HOST]:[PORT:34401]/web"
 }
