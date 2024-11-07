@@ -1,6 +1,6 @@
 {
     "build_from": {
-      "amd64": "fyb3roptik/threadfin"
+      "amd64": "senexcrenshaw/xteve:latest"
     },
     "codenotary": {
       "signer": "alexandrep.github@gmail.com"
