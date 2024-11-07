@@ -1,6 +1,6 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Threadfin
-version: "0.0.28"
+version: "0.0.29"
 slug: threadfin
 description: "Threadfin add-on"
 url: "https://github.com/bm735/ha-addons"
@@ -21,9 +21,12 @@ environment:
 #  XTEVE_HOME: "/data"
 webui: "[PROTO:ssl]://[HOST]:[PORT:34400]/web"
 map:
-  - share:rw
-  - homeassistant_config:rw
-#  - ssl:ro
+  - type: share
+    read_only: false
+  - type: homeassistant_config
+    read_only: false
+  - type: ssl
+    read_only: true  
 #image: "ghcr.io/bm735/threadfin-{arch}"
 #init: false
 #ports:
