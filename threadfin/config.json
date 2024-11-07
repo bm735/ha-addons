@@ -24,6 +24,6 @@
     "slug": "threadfin",
     "udev": true,
     "url": "https://github.com/bm735/ha-addons",
-    "version": "0.0.31",
+    "version": "0.0.32",
     "webui": "[PROTO:ssl]://[HOST]:[PORT:34400]/web"
   }

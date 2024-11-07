@@ -43,7 +43,7 @@
     ENV THREADFIN_DEBUG=0
     ENV THREADFIN_PORT=34400
     ENV THREADFIN_LOG=/var/log/threadfin.log
-    ENV THREADFIN_BIND_IP_ADDRESS=0.0.0.0
+    ENV THREADFIN_BIND_IP_ADDRESS=192.168.20.2
     
     # Add binary to PATH
     ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$THREADFIN_BIN
