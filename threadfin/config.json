@@ -5,7 +5,7 @@
     "codenotary": "alexandrep.github@gmail.com",
     "description": "M3U Proxy for Plex DVR and Emby Live TV",
     "environment": {
-      "XTEVE_PORT": 34401
+      "XTEVE_PORT": "34401"
     },
     "host_network": true,
     "map": [
